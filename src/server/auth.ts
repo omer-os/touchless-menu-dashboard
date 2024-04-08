@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session: async ({ session, user }) => {
       session.user.currentSelectedRestaurantId =
-        // @ts-ignore
+        // @ts-expect-error - session type error
         user.currentSelectedRestaurantId;
 
       return {

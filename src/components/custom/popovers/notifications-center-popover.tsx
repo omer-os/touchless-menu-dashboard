@@ -26,7 +26,7 @@ export default function NotificationsCenterPopover({
 
   useEffect(() => {
     const markAllAsRead = async () => {
-      const result = await markAllAsReadMutation.mutateAsync();
+      const result = markAllAsReadMutation.mutate();
     };
 
     if (isOpen) {
@@ -38,7 +38,7 @@ export default function NotificationsCenterPopover({
     <Popover
       onOpenChange={(open) => {
         if (open) {
-          markAllAsReadMutation.mutateAsync();
+          markAllAsReadMutation.mutate();
         }
       }}
     >
@@ -88,7 +88,7 @@ export default function NotificationsCenterPopover({
                 <div className="mt-4 flex gap-2">
                   <Button
                     onClick={async () => {
-                      await invitationMutation.mutateAsync({
+                      invitationMutation.mutate({
                         invitationId: notification.id,
                       });
                     }}
@@ -99,7 +99,7 @@ export default function NotificationsCenterPopover({
                   </Button>
                   <Button
                     onClick={async () => {
-                      await notificationMutation.mutateAsync({
+                      notificationMutation.mutate({
                         id: notification.id,
                       });
                     }}
