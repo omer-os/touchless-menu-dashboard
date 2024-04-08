@@ -29,6 +29,9 @@ export default async function MainSidebar() {
       <Separator />
 
       <div className="flex flex-col p-4">
+        <div className="mb-1 text-sm font-semibold text-muted-foreground">
+          Overview
+        </div>
         <MainSidebarMenu />
       </div>
     </div>

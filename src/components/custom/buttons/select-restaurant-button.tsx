@@ -2,6 +2,7 @@
 import { Restaurant } from "@prisma/client";
 import { VariantProps } from "class-variance-authority";
 import { useSession } from "next-auth/react";
+import { revalidatePath } from "next/cache";
 import React, { useState } from "react";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { api } from "~/trpc/react";
@@ -22,6 +23,8 @@ export default function SelectRestaurantButton({
   const mutateHook = api.user.selectRestaurant.useMutation({
     onSuccess: async () => {
       await update();
+
+      revalidatePath("/");
     },
   });
 

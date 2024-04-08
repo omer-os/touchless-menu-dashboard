@@ -9,10 +9,10 @@ const userSchema = z.object({
 });
 
 const restaurantSchema = z.object({
-  name: z.string().min(1),
-  description: z.string().min(1).optional(),
-  location: z.string().min(1).optional(),
-  phoneNumber: z.string().min(1).optional(),
+  name: z.string(),
+  description: z.string().optional(),
+  location: z.string().optional(),
+  phoneNumber: z.string().optional(),
   status: z.nativeEnum(RestaurantStatus),
 });
 
@@ -42,6 +42,19 @@ const restaurantUserSchema = z.object({
   restaurantId: z.number(),
 });
 
+const inviteUserSchema = z.object({
+  email: z.string().email(),
+  restaurantId: z.number(),
+  senderId: z.string(),
+  message: z.string().optional(),
+});
+
+const notificationSchema = z.object({
+  userId: z.string(),
+  message: z.string(),
+  type: z.string(),
+});
+
 export {
   userSchema,
   restaurantSchema,
@@ -49,4 +62,6 @@ export {
   categorySchema,
   itemSchema,
   restaurantUserSchema,
+  inviteUserSchema,
+  notificationSchema,
 };

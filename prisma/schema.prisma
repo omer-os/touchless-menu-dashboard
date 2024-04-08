@@ -44,6 +44,8 @@ model User {
   RestaurantUser              RestaurantUser[]
   sessions                    Session[]
   Restaurant                  Restaurant?      @relation(fields: [currentSelectedRestaurantId], references: [id])
+  Notification                Notification[]
+  Invitation                  Invitation[]
 }
 
 model VerificationToken {
@@ -93,6 +95,7 @@ model Restaurant {
   Page           Page[]
   RestaurantUser RestaurantUser[]
   User           User?
+  Invitation     Invitation[]
 }
 
 model RestaurantUser {
@@ -108,4 +111,27 @@ model RestaurantUser {
 enum RestaurantStatus {
   ACTIVE
   ARCHIVE
+}
+
+model Invitation {
+  id           String     @id @default(cuid())
+  email        String 
+  restaurantId Int 
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  senderId     String 
+  Sender       User       @relation(fields: [senderId], references: [id])
+  accepted     Boolean    @default(false) 
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

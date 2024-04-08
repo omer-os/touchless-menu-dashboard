@@ -9,6 +9,7 @@ import {
 } from "~/components/ui/popover";
 import { cn } from "~/lib/utils";
 import SelectRestaurantButton from "../buttons/select-restaurant-button";
+import Link from "next/link";
 
 export default function MyRestaurantsPopover({
   myRestaurants,
@@ -68,7 +69,14 @@ export default function MyRestaurantsPopover({
             ))}
           </div>
 
-          <div className="mt-2"></div>
+          <div className="mt-2">
+            <Link
+              className="text-center text-primary underline"
+              href="/restaurant/new"
+            >
+              Add new restaurant
+            </Link>
+          </div>
         </PopoverContent>
       </Popover>
     </div>
